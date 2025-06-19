@@ -1,4 +1,4 @@
-# create_robot
+# R(OS)oomba
 
 [ROS](https://docs.ros.org) driver for iRobot Create 1 and 2.
 This package wraps the C++ library [libcreate][libcreate], which uses iRobot's [Open Interface Specification][oi_spec].
