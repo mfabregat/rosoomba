@@ -1,11 +1,16 @@
 cmake_minimum_required(VERSION 3.5)
-project(create_bringup)
+project(rosoomba_description)
 
+# Find dependencies
 find_package(ament_cmake REQUIRED)
 
-install(DIRECTORY config launch
+# Install directories
+install(DIRECTORY
+  launch
+  meshes
+  urdf
+  rviz
   DESTINATION share/${PROJECT_NAME}
-  PATTERN ".svn" EXCLUDE
 )
 
 ament_package()
