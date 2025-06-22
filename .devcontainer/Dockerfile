@@ -1,8 +1,10 @@
-FROM althack/ros2:jazzy-gazebo
+FROM althack/ros2:humble-gazebo
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
 ENV DEBIAN_FRONTEND=noninteractive
+
+# Update package lists to ensure we have the latest ROS packages available
 RUN apt-get update \
    && apt-get -y install --no-install-recommends python3-rosdep \
    python3-colcon-common-extensions \
