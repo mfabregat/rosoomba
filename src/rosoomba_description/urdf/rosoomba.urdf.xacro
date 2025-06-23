@@ -1,8 +1,21 @@
 <?xml version="1.0" ?>
 <robot name="rosoomba" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:include filename="$(find create_description)/urdf/create_base.urdf.xacro" />
 
-  <xacro:create_base wheel_separation="0.235" base_diameter="0.3485">
-    <mesh filename="package://create_description/meshes/create_2.dae" />
-  </xacro:create_base>
+  <xacro:property name="package_path" value="$(find rosoomba_description)" />
+
+  <xacro:include filename="${package_path}/urdf/params.urdf.xacro" />
+
+  <xacro:include filename="${package_path}/urdf/base.urdf.xacro" />
+   
+  <xacro:include filename="${package_path}/urdf/wheel.urdf.xacro" />
+  <xacro:create_wheel prefix="left" y_offset="${wheel_separation / 2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
+  <xacro:create_wheel prefix="right" y_offset="${wheel_separation / -2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
+
+  <!-- Gazebo simulation sensors -->
+  <xacro:include filename="${package_path}/urdf/gazebo.urdf.xacro" />  
+  <xacro:sim_create_base/>
+  <xacro:sim_create_wall_sensor/>
+  <xacro:sim_create_cliff_sensors/>
+  <xacro:sim_imu/>
+
 </robot>

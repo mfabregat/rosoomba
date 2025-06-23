@@ -10,6 +10,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.actions import AppendEnvironmentVariable
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.parameter_descriptions import ParameterValue
 
 
 
@@ -30,15 +31,28 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             name='spawn_z', 
-            default_value='0.0',
+            default_value='0.1',
             description='Robot spawn position in Z axis'
         ),
         DeclareLaunchArgument(
             name='spawn_yaw', 
             default_value='0.0',
             description='Robot spawn heading'
-        )
+        ),
+        DeclareLaunchArgument(
+            name="world_name",
+            default_value="empty.world",
+            description="Gazebo world name",
+        ),
     ]
+
+    world_path = PathJoinSubstitution(
+        [
+            FindPackageShare("rosoomba_gazebo"),
+            "worlds",
+            LaunchConfiguration("world_name"),
+        ]
+    )
 
     # Start Gazebo
     gazebo = IncludeLaunchDescription(
@@ -52,7 +66,7 @@ def generate_launch_description():
             )
         ),
         launch_arguments={
-            "gz_args": ["-r ", " --verbose"],
+            "gz_args": ["-r ", world_path, " --verbose"],
         }.items(),
     )
 
@@ -64,30 +78,8 @@ def generate_launch_description():
         output="screen",
         arguments=[
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-            # Bridge world services for entity spawning/deletion
-            "/world/tennis_court/create@ros_gz_interfaces/srv/SpawnEntity",
-            "/world/tennis_court/remove@ros_gz_interfaces/srv/DeleteEntity",
-            # Bridge wrench topic for applying forces to entities
-            "/world/tennis_court/wrench@ros_gz_interfaces/msg/EntityWrench]gz.msgs.EntityWrench",
-        ],
-        remappings=[
-            ("/world/tennis_court/create", "/spawn_entity"),
-            ("/world/tennis_court/remove", "/delete_entity"),
-            ("/world/tennis_court/wrench", "/apply_wrench"),
         ],
     )
-
-    # Spawn robot in Gazebo
-    gazebo_tf_publisher = Node(
-        package="tbot_gazebo",
-        executable="gazebo_tf_publisher_node",
-        parameters=[
-            {"gz_pose_topic": "/world/tennis_court/dynamic_pose/info"},
-            {"base_frame_id": "base_footprint"},
-            {"use_sim_time": use_sim_time},
-        ],
-    )
-
 
     # Spawn robot in Gazebo
     spawn_entity = Node(
@@ -96,7 +88,7 @@ def generate_launch_description():
         output="screen",
         arguments=[
             "-topic", "robot_description",
-            "-entity", "tbot",
+            "-entity", "rosoomba",
             '-x', LaunchConfiguration('spawn_x'),
             '-y', LaunchConfiguration('spawn_y'),
             '-z', LaunchConfiguration('spawn_z'),
@@ -108,7 +100,6 @@ def generate_launch_description():
         gazebo,
         gazebo_bridge,
         spawn_entity,
-        gazebo_tf_publisher,
     ]
     
     # Launch all nodes
