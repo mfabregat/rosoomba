@@ -14,9 +14,9 @@ def generate_launch_description():
     # Declare arguments
     declared_arguments = [
         DeclareLaunchArgument(
-            name='publish_joints', 
+            name='gui', 
             default_value='true',
-            description='Launch joint_states_publisher'
+            description='Launch joint_state_publisher_gui'
         ),
         DeclareLaunchArgument(
             name='rviz', 
@@ -62,7 +62,7 @@ def generate_launch_description():
             package='joint_state_publisher_gui',
             executable='joint_state_publisher_gui',
             name='joint_state_publisher_gui',
-            condition=IfCondition(LaunchConfiguration("publish_joints")),
+            condition=IfCondition(LaunchConfiguration("gui")),
             parameters=[
                 {'use_sim_time': LaunchConfiguration('use_sim_time')}
             ]

@@ -8,7 +8,7 @@
             "label": "build",
             "detail": "Build workspace (default)",
             "type": "shell",
-            "command": "./.vscode/tasks/build.sh",
+            "command": "./.vscode/tasks/build.sh && source install/setup.bash",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -17,12 +17,11 @@
         },
         {
             "label": "hard_build",
-            "detail": "Erase and build workspace (default)",
+            "detail": "Erase and build workspace",
             "type": "shell",
-            "command": "./.vscode/tasks/hard_build.sh",
+            "command": "./.vscode/tasks/hard_build.sh && source install/setup.bash",
             "group": {
                 "kind": "build",
-                "isDefault": true
             },
             "problemMatcher": "$gcc"
         },

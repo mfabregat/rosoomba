@@ -95,6 +95,15 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="wall_sensor_plugin" filename="libgazebo_ros_range.so">
+          <ros>
+            <namespace></namespace>
+            <remapping>~/out:=wall_sensor/range</remapping>
+          </ros>
+          <output_type>sensor_msgs/Range</output_type>
+          <radiation_type>infrared</radiation_type>
+          <frame_name>wall_sensor_link</frame_name>
+        </plugin>
       </sensor>
     </gazebo>
   </xacro:macro>
@@ -121,6 +130,15 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="left_cliff_sensor_plugin" filename="libgazebo_ros_range.so">
+          <ros>
+            <namespace></namespace>
+            <remapping>~/out:=left_cliff_sensor/range</remapping>
+          </ros>
+          <output_type>sensor_msgs/Range</output_type>
+          <radiation_type>infrared</radiation_type>
+          <frame_name>left_cliff_sensor_link</frame_name>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -145,6 +163,15 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="right_cliff_sensor_plugin" filename="libgazebo_ros_range.so">
+          <ros>
+            <namespace></namespace>
+            <remapping>~/out:=right_cliff_sensor/range</remapping>
+          </ros>
+          <output_type>sensor_msgs/Range</output_type>
+          <radiation_type>infrared</radiation_type>
+          <frame_name>right_cliff_sensor_link</frame_name>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -169,6 +196,15 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="leftfront_cliff_sensor_plugin" filename="libgazebo_ros_range.so">
+          <ros>
+            <namespace></namespace>
+            <remapping>~/out:=leftfront_cliff_sensor/range</remapping>
+          </ros>
+          <output_type>sensor_msgs/Range</output_type>
+          <radiation_type>infrared</radiation_type>
+          <frame_name>leftfront_cliff_sensor_link</frame_name>
+        </plugin>
       </sensor>
     </gazebo>
 
@@ -193,6 +229,15 @@
             <resolution>0.1</resolution>
           </range>
         </ray>
+        <plugin name="rightfront_cliff_sensor_plugin" filename="libgazebo_ros_range.so">
+          <ros>
+            <namespace></namespace>
+            <remapping>~/out:=rightfront_cliff_sensor/range</remapping>
+          </ros>
+          <output_type>sensor_msgs/Range</output_type>
+          <radiation_type>infrared</radiation_type>
+          <frame_name>rightfront_cliff_sensor_link</frame_name>
+        </plugin>
       </sensor>
     </gazebo>
   </xacro:macro>

@@ -5,8 +5,8 @@
     <link name="${prefix}_wheel_link">
     <inertial>
       <origin xyz="0 0 0" />
-      <mass value="0.01" />
-      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+      <mass value="0.2" />
+      <inertia ixx="0.002" ixy="0.0" ixz="0.0" iyy="0.002" iyz="0.0" izz="0.002" />
     </inertial>
 
     <visual>
@@ -23,6 +23,16 @@
       </geometry>
     </collision>
     </link>
+
+    <!-- Gazebo material properties for wheel friction -->
+    <gazebo reference="${prefix}_wheel_link">
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+      <kp>1000000.0</kp>
+      <kd>100.0</kd>
+      <minDepth>0.001</minDepth>
+      <maxVel>1.0</maxVel>
+    </gazebo>
 
    <joint name="${prefix}_wheel_joint" type="continuous">
       <origin xyz="0 ${y_offset} 0.015" rpy="0 0 0" />

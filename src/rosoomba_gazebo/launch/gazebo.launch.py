@@ -71,15 +71,15 @@ def generate_launch_description():
     )
 
 
-    # Gazebo bridge
-    gazebo_bridge = Node(
-        package="ros_gz_bridge",
-        executable="parameter_bridge",
-        output="screen",
-        arguments=[
-            "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
-        ],
-    )
+    # # Gazebo bridge
+    # gazebo_bridge = Node(
+    #     package="ros_gz_bridge",
+    #     executable="parameter_bridge",
+    #     output="screen",
+    #     arguments=[
+    #         "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+    #     ],
+    # )
 
     # Spawn robot in Gazebo
     spawn_entity = Node(
@@ -87,8 +87,8 @@ def generate_launch_description():
         executable="create",
         output="screen",
         arguments=[
-            "-topic", "robot_description",
-            "-entity", "rosoomba",
+            "-topic", "robot_description", # topic to read the robot description (description.launch.py)
+            "-entity", "rosoomba", # name of the robot in Gazebo
             '-x', LaunchConfiguration('spawn_x'),
             '-y', LaunchConfiguration('spawn_y'),
             '-z', LaunchConfiguration('spawn_z'),
@@ -98,7 +98,7 @@ def generate_launch_description():
 
     nodes = [
         gazebo,
-        gazebo_bridge,
+        # gazebo_bridge,
         spawn_entity,
     ]
     

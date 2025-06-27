@@ -3,19 +3,16 @@
 
   <xacro:property name="package_path" value="$(find rosoomba_description)" />
 
-  <xacro:include filename="${package_path}/urdf/params.urdf.xacro" />
+  <xacro:include filename="${package_path}/urdf/params.xacro" />
 
-  <xacro:include filename="${package_path}/urdf/base.urdf.xacro" />
+  <xacro:include filename="${package_path}/urdf/rosoomba_core.xacro" />
    
-  <xacro:include filename="${package_path}/urdf/wheel.urdf.xacro" />
+  <xacro:include filename="${package_path}/urdf/wheel.xacro" />
   <xacro:create_wheel prefix="left" y_offset="${wheel_separation / 2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
   <xacro:create_wheel prefix="right" y_offset="${wheel_separation / -2}" wheel_radius="${wheel_radius}" wheel_width="${wheel_width}"/>
 
-  <!-- Gazebo simulation sensors -->
-  <xacro:include filename="${package_path}/urdf/gazebo.urdf.xacro" />  
-  <xacro:sim_create_base/>
-  <xacro:sim_create_wall_sensor/>
-  <xacro:sim_create_cliff_sensors/>
-  <xacro:sim_imu/>
+  <!-- <xacro:include filename="${package_path}/urdf/gazebo_control.xacro" /> -->
+
+  <xacro:include filename="${package_path}/urdf/ros2_control.xacro" />
 
 </robot>
