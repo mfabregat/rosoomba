@@ -17,8 +17,8 @@
 		"--volume=/mnt/wslg:/mnt/wslg",
 		"--ipc=host",
 		// Input devices for joysticks/gamepads
-		"--device=/dev/input",
-		"--volume=/dev/input:/dev/input:rw"
+		"--volume=/dev:/dev",
+		"--device-cgroup-rule=c *:* rmw"
 		// uncomment to use intel iGPU
 		// "--device=/dev/dri"
 	],
