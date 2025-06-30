@@ -132,15 +132,15 @@ CreateDriver::CreateDriver()
     "dock", 10, std::bind(&CreateDriver::dockCallback, this, std::placeholders::_1));
   undock_sub_ = create_subscription<std_msgs::msg::Empty>(
     "undock", 10, std::bind(&CreateDriver::undockCallback, this, std::placeholders::_1));
-  define_song_sub_ = create_subscription<create_msgs::msg::DefineSong>(
+  define_song_sub_ = create_subscription<rosoomba_msgs::msg::DefineSong>(
     "define_song", 10, std::bind(&CreateDriver::defineSongCallback, this, std::placeholders::_1));
-  play_song_sub_ = create_subscription<create_msgs::msg::PlaySong>(
+  play_song_sub_ = create_subscription<rosoomba_msgs::msg::PlaySong>(
     "play_song", 10, std::bind(&CreateDriver::playSongCallback, this, std::placeholders::_1));
-  side_brush_motor_sub_ = create_subscription<create_msgs::msg::MotorSetpoint>(
+  side_brush_motor_sub_ = create_subscription<rosoomba_msgs::msg::MotorSetpoint>(
     "side_brush_motor", 10, std::bind(&CreateDriver::sideBrushMotor, this, std::placeholders::_1));
-  main_brush_motor_sub_ = create_subscription<create_msgs::msg::MotorSetpoint>(
+  main_brush_motor_sub_ = create_subscription<rosoomba_msgs::msg::MotorSetpoint>(
     "main_brush_motor", 10, std::bind(&CreateDriver::mainBrushMotor, this, std::placeholders::_1));
-  vacuum_motor_sub_ = create_subscription<create_msgs::msg::MotorSetpoint>(
+  vacuum_motor_sub_ = create_subscription<rosoomba_msgs::msg::MotorSetpoint>(
     "vacuum_motor", 10, std::bind(&CreateDriver::vacuumBrushMotor, this, std::placeholders::_1));
 
   // Setup publishers
@@ -157,11 +157,11 @@ CreateDriver::CreateDriver()
   charge_ratio_pub_ = create_publisher<std_msgs::msg::Float32>("battery/charge_ratio", 30);
   capacity_pub_ = create_publisher<std_msgs::msg::Float32>("battery/capacity", 30);
   temperature_pub_ = create_publisher<std_msgs::msg::Int16>("battery/temperature", 30);
-  charging_state_pub_ = create_publisher<create_msgs::msg::ChargingState>("battery/charging_state", 30);
+  charging_state_pub_ = create_publisher<rosoomba_msgs::msg::ChargingState>("battery/charging_state", 30);
   omni_char_pub_ = create_publisher<std_msgs::msg::UInt16>("ir_omni", 30);
-  mode_pub_ = create_publisher<create_msgs::msg::Mode>("mode", 30);
-  bumper_pub_ = create_publisher<create_msgs::msg::Bumper>("bumper", 30);
-  cliff_pub_ = create_publisher<create_msgs::msg::Cliff>("cliff", 30);
+  mode_pub_ = create_publisher<rosoomba_msgs::msg::Mode>("mode", 30);
+  bumper_pub_ = create_publisher<rosoomba_msgs::msg::Bumper>("bumper", 30);
+  cliff_pub_ = create_publisher<rosoomba_msgs::msg::Cliff>("cliff", 30);
   wheeldrop_pub_ = create_publisher<std_msgs::msg::Empty>("wheeldrop", 30);
   wheel_joint_pub_ = create_publisher<sensor_msgs::msg::JointState>("joint_states", 10);
 
@@ -272,21 +272,21 @@ void CreateDriver::undockCallback(std_msgs::msg::Empty::UniquePtr msg)
   robot_->setMode(create::MODE_FULL);
 }
 
-void CreateDriver::defineSongCallback(create_msgs::msg::DefineSong::UniquePtr msg)
+void CreateDriver::defineSongCallback(rosoomba_msgs::msg::DefineSong::UniquePtr msg)
 {
   if (!robot_->defineSong(msg->song, msg->length, &(msg->notes.front()), &(msg->durations.front()))) {
     RCLCPP_ERROR_STREAM(get_logger(), "[CREATE] Failed to define song " << msg->song << " of length " << msg->length);
   }
 }
 
-void CreateDriver::playSongCallback(create_msgs::msg::PlaySong::UniquePtr msg)
+void CreateDriver::playSongCallback(rosoomba_msgs::msg::PlaySong::UniquePtr msg)
 {
   if (!robot_->playSong(msg->song)) {
     RCLCPP_ERROR_STREAM(get_logger(), "[CREATE] Failed to play song " << msg->song);
   }
 }
 
-void CreateDriver::sideBrushMotor(create_msgs::msg::MotorSetpoint::UniquePtr msg)
+void CreateDriver::sideBrushMotor(rosoomba_msgs::msg::MotorSetpoint::UniquePtr msg)
 {
   if (!robot_->setSideMotor(msg->duty_cycle)) {
     RCLCPP_ERROR_STREAM(
@@ -294,14 +294,14 @@ void CreateDriver::sideBrushMotor(create_msgs::msg::MotorSetpoint::UniquePtr msg
   }
 }
 
-void CreateDriver::mainBrushMotor(create_msgs::msg::MotorSetpoint::UniquePtr msg)
+void CreateDriver::mainBrushMotor(rosoomba_msgs::msg::MotorSetpoint::UniquePtr msg)
 {
   if (!robot_->setMainMotor(msg->duty_cycle)) {
     RCLCPP_ERROR_STREAM(get_logger(), "[CREATE] Failed to set duty cycle " << msg->duty_cycle << " for main motor");
   }
 }
 
-void CreateDriver::vacuumBrushMotor(create_msgs::msg::MotorSetpoint::UniquePtr msg)
+void CreateDriver::vacuumBrushMotor(rosoomba_msgs::msg::MotorSetpoint::UniquePtr msg)
 {
   if (!robot_->setVacuumMotor(msg->duty_cycle)) {
     RCLCPP_ERROR_STREAM(get_logger(), "[CREATE] Failed to set duty cycle " << msg->duty_cycle << " for vacuum motor");

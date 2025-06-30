@@ -24,6 +24,7 @@
   <exec_depend>tf2_ros</exec_depend>
   <exec_depend>python3-transforms3d</exec_depend>
   <exec_depend>std_msgs</exec_depend>
+  <exec_depend>rosoomba_msgs</exec_depend>
   
   <!-- Additional ROS2 Control dependencies -->
   <exec_depend>ros2_control</exec_depend>

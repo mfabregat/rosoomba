@@ -76,7 +76,7 @@ The workspace contains several specialized packages:
 
 ### Core Packages (credits to [AutonomyLab](https://github.com/AutonomyLab))
 - **`create_driver`** - Main ROS 2 driver for real iRobot Create/Roomba robots
-- **`create_msgs`** - Custom message definitions for Create-specific sensors and commands
+- **`rosoomba_msgs`** - Custom message definitions for Create-specific sensors and commands
 - **`libcreate`** - C++ library for low-level robot communication
 
 ### Simulation Packages  
@@ -219,9 +219,9 @@ If not using the dev container:
 | `/battery/current` | `std_msgs/Int16` | Battery current |
 | `/battery/charge` | `std_msgs/Float32` | Battery charge level |
 | `/battery/capacity` | `std_msgs/Float32` | Battery capacity |
-| `/bumper` | `create_msgs/Bumper` | Bumper sensor states |
-| `/cliff` | `create_msgs/Cliff` | Cliff sensor readings |
-| `/mode` | `create_msgs/Mode` | Robot operation mode |
+| `/bumper` | `rosoomba_msgs/Bumper` | Bumper sensor states |
+| `/cliff` | `rosoomba_msgs/Cliff` | Cliff sensor readings |
+| `/mode` | `rosoomba_msgs/Mode` | Robot operation mode |
 
 ### Subscribed Topics
 | Topic | Type | Description |
@@ -229,8 +229,8 @@ If not using the dev container:
 | `/cmd_vel` | `geometry_msgs/Twist` | Velocity commands |
 | `/dock` | `std_msgs/Empty` | Dock command |
 | `/undock` | `std_msgs/Empty` | Undock command |
-| `/define_song` | `create_msgs/DefineSong` | Define custom songs |
-| `/play_song` | `create_msgs/PlaySong` | Play defined songs |
+| `/define_song` | `rosoomba_msgs/DefineSong` | Define custom songs |
+| `/play_song` | `rosoomba_msgs/PlaySong` | Play defined songs |
 
 ### Simulation Additional Topics
 | Topic | Type | Description |

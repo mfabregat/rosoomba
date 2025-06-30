@@ -8,7 +8,7 @@ add_compile_options(-Wall -Wextra -Wpedantic)
 find_package(libcreate REQUIRED)
 
 find_package(ament_cmake REQUIRED)
-find_package(create_msgs REQUIRED)
+find_package(rosoomba_msgs REQUIRED)
 find_package(diagnostic_msgs REQUIRED)
 find_package(diagnostic_updater REQUIRED)
 find_package(geometry_msgs REQUIRED)
@@ -26,7 +26,7 @@ include_directories(
 
 add_executable(${PROJECT_NAME} src/${PROJECT_NAME}.cpp)
 ament_target_dependencies(${PROJECT_NAME}
-  create_msgs
+  rosoomba_msgs
   diagnostic_msgs
   diagnostic_updater
   geometry_msgs

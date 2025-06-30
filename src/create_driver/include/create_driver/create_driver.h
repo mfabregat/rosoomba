@@ -30,13 +30,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define CREATE_DRIVER__CREATE_DRIVER_H_
 #include <string>
 
-#include "create_msgs/msg/charging_state.hpp"
-#include "create_msgs/msg/mode.hpp"
-#include "create_msgs/msg/bumper.hpp"
-#include "create_msgs/msg/cliff.hpp"
-#include "create_msgs/msg/define_song.hpp"
-#include "create_msgs/msg/play_song.hpp"
-#include "create_msgs/msg/motor_setpoint.hpp"
+#include "rosoomba_msgs/msg/charging_state.hpp"
+#include "rosoomba_msgs/msg/mode.hpp"
+#include "rosoomba_msgs/msg/bumper.hpp"
+#include "rosoomba_msgs/msg/cliff.hpp"
+#include "rosoomba_msgs/msg/define_song.hpp"
+#include "rosoomba_msgs/msg/play_song.hpp"
+#include "rosoomba_msgs/msg/motor_setpoint.hpp"
 
 #include "create/create.h"
 
@@ -76,11 +76,11 @@ private:
   rclcpp::Subscription<std_msgs::msg::UInt8MultiArray>::SharedPtr set_ascii_sub_;
   rclcpp::Subscription<std_msgs::msg::Empty>::SharedPtr dock_sub_;
   rclcpp::Subscription<std_msgs::msg::Empty>::SharedPtr undock_sub_;
-  rclcpp::Subscription<create_msgs::msg::DefineSong>::SharedPtr define_song_sub_;
-  rclcpp::Subscription<create_msgs::msg::PlaySong>::SharedPtr play_song_sub_;
-  rclcpp::Subscription<create_msgs::msg::MotorSetpoint>::SharedPtr side_brush_motor_sub_;
-  rclcpp::Subscription<create_msgs::msg::MotorSetpoint>::SharedPtr main_brush_motor_sub_;
-  rclcpp::Subscription<create_msgs::msg::MotorSetpoint>::SharedPtr vacuum_motor_sub_;
+  rclcpp::Subscription<rosoomba_msgs::msg::DefineSong>::SharedPtr define_song_sub_;
+  rclcpp::Subscription<rosoomba_msgs::msg::PlaySong>::SharedPtr play_song_sub_;
+  rclcpp::Subscription<rosoomba_msgs::msg::MotorSetpoint>::SharedPtr side_brush_motor_sub_;
+  rclcpp::Subscription<rosoomba_msgs::msg::MotorSetpoint>::SharedPtr main_brush_motor_sub_;
+  rclcpp::Subscription<rosoomba_msgs::msg::MotorSetpoint>::SharedPtr vacuum_motor_sub_;
 
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
   rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr clean_btn_pub_;
@@ -95,13 +95,13 @@ private:
   rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr charge_ratio_pub_;
   rclcpp::Publisher<std_msgs::msg::Float32>::SharedPtr capacity_pub_;
   rclcpp::Publisher<std_msgs::msg::Int16>::SharedPtr temperature_pub_;
-  rclcpp::Publisher<create_msgs::msg::ChargingState>::SharedPtr charging_state_pub_;
+  rclcpp::Publisher<rosoomba_msgs::msg::ChargingState>::SharedPtr charging_state_pub_;
   rclcpp::Publisher<std_msgs::msg::UInt16>::SharedPtr omni_char_pub_;
-  rclcpp::Publisher<create_msgs::msg::Mode>::SharedPtr mode_pub_;
-  rclcpp::Publisher<create_msgs::msg::Bumper>::SharedPtr bumper_pub_;
+  rclcpp::Publisher<rosoomba_msgs::msg::Mode>::SharedPtr mode_pub_;
+  rclcpp::Publisher<rosoomba_msgs::msg::Bumper>::SharedPtr bumper_pub_;
   rclcpp::Publisher<std_msgs::msg::Empty>::SharedPtr wheeldrop_pub_;
   rclcpp::Publisher<sensor_msgs::msg::JointState>::SharedPtr wheel_joint_pub_;
-  rclcpp::Publisher<create_msgs::msg::Cliff>::SharedPtr cliff_pub_;
+  rclcpp::Publisher<rosoomba_msgs::msg::Cliff>::SharedPtr cliff_pub_;
 
   rclcpp::TimerBase::SharedPtr loop_timer_;
 
@@ -109,10 +109,10 @@ private:
 
   diagnostic_updater::Updater diagnostics_;
 
-  create_msgs::msg::Mode mode_msg_;
-  create_msgs::msg::ChargingState charging_state_msg_;
-  create_msgs::msg::Bumper bumper_msg_;
-  create_msgs::msg::Cliff cliff_msg_;
+  rosoomba_msgs::msg::Mode mode_msg_;
+  rosoomba_msgs::msg::ChargingState charging_state_msg_;
+  rosoomba_msgs::msg::Bumper bumper_msg_;
+  rosoomba_msgs::msg::Cliff cliff_msg_;
   nav_msgs::msg::Odometry odom_msg_;
   geometry_msgs::msg::TransformStamped tf_odom_;
   rclcpp::Time last_cmd_vel_time_;
@@ -142,11 +142,11 @@ private:
   void setASCIICallback(std_msgs::msg::UInt8MultiArray::UniquePtr msg);
   void dockCallback(std_msgs::msg::Empty::UniquePtr msg);
   void undockCallback(std_msgs::msg::Empty::UniquePtr msg);
-  void defineSongCallback(create_msgs::msg::DefineSong::UniquePtr msg);
-  void playSongCallback(create_msgs::msg::PlaySong::UniquePtr msg);
-  void sideBrushMotor(create_msgs::msg::MotorSetpoint::UniquePtr msg);
-  void mainBrushMotor(create_msgs::msg::MotorSetpoint::UniquePtr msg);
-  void vacuumBrushMotor(create_msgs::msg::MotorSetpoint::UniquePtr msg);
+  void defineSongCallback(rosoomba_msgs::msg::DefineSong::UniquePtr msg);
+  void playSongCallback(rosoomba_msgs::msg::PlaySong::UniquePtr msg);
+  void sideBrushMotor(rosoomba_msgs::msg::MotorSetpoint::UniquePtr msg);
+  void mainBrushMotor(rosoomba_msgs::msg::MotorSetpoint::UniquePtr msg);
+  void vacuumBrushMotor(rosoomba_msgs::msg::MotorSetpoint::UniquePtr msg);
 
   bool update();
   void updateBatteryDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat);

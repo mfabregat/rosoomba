@@ -38,7 +38,7 @@ Changelog for package create_driver
   * create_autonomy -> create_robot
   * ca_description -> create_description
   * ca_driver -> create_driver
-  * ca_msgs -> create_msgs
+  * ca_msgs -> rosoomba_msgs
   * ca_tools -> create_bringup
 * Contributors: Jacob Perron, Josh Gadeken, Owen Hooper, Pedro Grojsgold, pgold
 

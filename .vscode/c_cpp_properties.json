@@ -6,7 +6,7 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
-        "/workspaces/rosoomba/install/create_msgs/include/**",
+        "/workspaces/rosoomba/install/rosoomba_msgs/include/**",
         "/opt/ros/jazzy/include/**",
         "/workspaces/rosoomba/src/create_driver/include/**",
         "/usr/include/**"
